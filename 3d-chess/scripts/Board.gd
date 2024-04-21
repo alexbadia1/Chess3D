@@ -239,7 +239,8 @@ func _on_square_hover(_new_active_coordinate: String):
 			_unhint(cvm)
 		_curr_valid_moves = []
 		return
-		
+	
+	# Move piece
 	if _curr_valid_moves.has(_new_active_coordinate):
 		
 		if _prev_move_src != null:
@@ -250,6 +251,14 @@ func _on_square_hover(_new_active_coordinate: String):
 		
 		_prev_move_src = _curr_move_src
 		_prev_move_dst = _new_active_coordinate
+		
+		var chess_piece: Node3D = get_node(_board[_prev_move_src])
+		var tile: CSGBox3D = get_node(_prev_move_dst).get_node('ColorSquare')
+		var tile_pos = tile.global_transform.origin
+		chess_piece.global_transform.origin = tile_pos + Vector3(0, .48, 0)
+		
+		_board[_prev_move_dst] = _board[_prev_move_src]
+		_board[_prev_move_src] = null
 		
 		_highlight(_prev_move_src)
 		_highlight(_prev_move_dst)
