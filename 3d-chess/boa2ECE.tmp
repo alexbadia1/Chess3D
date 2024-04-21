@@ -1,0 +1,472 @@
+[gd_scene load_steps=8 format=3 uid="uid://dl8g7cmenc4w8"]
+
+[ext_resource type="PackedScene" uid="uid://bdbdfcvyf422a" path="res://pawn.glb" id="1_4hmpi"]
+[ext_resource type="Script" path="res://SquareLight.gd" id="1_cahjr"]
+[ext_resource type="Script" path="res://Board.gd" id="1_d0exn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlkx1"]
+size = Vector3(0.671768, 1, 0.650269)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkml8"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu2yo"]
+
+[sub_resource type="Environment" id="Environment_2rvrs"]
+background_mode = 1
+background_color = Color(0, 0.639216, 0.917647, 1)
+ambient_light_source = 2
+ssil_enabled = true
+sdfgi_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Board" type="Node3D" parent="."]
+script = ExtResource("1_d0exn")
+
+[node name="BoardSection_4x4_1" type="Node3D" parent="Board"]
+
+[node name="SquareLight" type="Area3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0, 0.35)
+script = ExtResource("1_cahjr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Board/BoardSection_4x4_1/SquareLight"]
+shape = SubResource("BoxShape3D_hlkx1")
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/BoardSection_4x4_1/SquareLight"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0, 0, 0)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed3" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed4" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed5" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed6" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed7" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed8" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 1.025)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite3" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite4" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite5" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite6" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite7" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite8" type="CSGBox3D" parent="Board/BoardSection_4x4_1"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="board_4x4_2" type="Node3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 2, 0)
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed3" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed4" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed5" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed6" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed7" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed8" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 1.025)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite3" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite4" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite5" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite6" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite7" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite8" type="CSGBox3D" parent="Board/board_4x4_2"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="board_4x4_3" type="Node3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, -2, 0)
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed3" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed4" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed5" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed6" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed7" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed8" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 1.025)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite3" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite4" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite5" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, 1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite6" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite7" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 1.05, 0, -1.05)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite8" type="CSGBox3D" parent="Board/board_4x4_3"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -1.05, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="board_2x2_4" type="Node3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 4, 1.4)
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/board_2x2_4"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/board_2x2_4"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/board_2x2_4"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/board_2x2_4"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="board_2x2_5" type="Node3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 4, -1.4)
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/board_2x2_5"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/board_2x2_5"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/board_2x2_5"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/board_2x2_5"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="board_2x2_6" type="Node3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, -1.4)
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/board_2x2_6"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/board_2x2_6"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/board_2x2_6"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/board_2x2_6"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="board_2x2_7" type="Node3D" parent="Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8, 0, 1.4)
+
+[node name="CSGBox3DRed1" type="CSGBox3D" parent="Board/board_2x2_7"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DRed2" type="CSGBox3D" parent="Board/board_2x2_7"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_rkml8")
+
+[node name="CSGBox3DWhite1" type="CSGBox3D" parent="Board/board_2x2_7"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, -0.35, 0, 0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="CSGBox3DWhite2" type="CSGBox3D" parent="Board/board_2x2_7"]
+transform = Transform3D(0.687983, 0, 0, 0, 0.687983, 0, 0, 0, 0.687983, 0.35, 0, -0.35)
+cast_shadow = 0
+size = Vector3(1, 0.25, 1)
+material = SubResource("StandardMaterial3D_gu2yo")
+
+[node name="PawnBlack1" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 2.474, 4.375, -1.04)
+
+[node name="PawnBlack2" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 2.459, 4.375, -1.775)
+
+[node name="PawnBlack3" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 2.459, 4.375, 1.045)
+
+[node name="PawnBlack4" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 2.459, 4.375, 1.762)
+
+[node name="PawnBlack5" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 1.745, 2.375, 1.05)
+
+[node name="PawnBlack6" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 1.745, 2.375, 0.345)
+
+[node name="PawnBlack7" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 1.745, 2.375, -0.345)
+
+[node name="PawnBlack8" parent="." instance=ExtResource("1_4hmpi")]
+transform = Transform3D(0.8, 0, 0, 0, -3.49691e-08, 0.8, 0, -0.8, -3.49691e-08, 1.745, 2.375, -1.05)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.799685, 0.37459, -0.469241, 0, 0.78152, 0.62388, 0.60042, 0.498907, -0.62497, -4.05, 5.455, -4.935)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0104718, 0.999945, 0, -0.999945, -0.0104718, -7.079, 4.28, -0.255)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2rvrs")
+
+[connection signal="mouse_entered" from="Board/BoardSection_4x4_1/SquareLight" to="Board/BoardSection_4x4_1/SquareLight" method="_on_mouse_entered"]
