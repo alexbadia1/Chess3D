@@ -1,5 +1,8 @@
 extends Node3D
 
+var LIGHT = 'LIGHT'
+var DARK = 'DARK'
+
 @export var _curr_player = 'Black'
 
 var Z = 'z'
@@ -100,7 +103,10 @@ var _board = {
 	'f4_3': null,
 }
 
-
+var PAWN_HOME_ROW = [
+	# White Pawns
+	'a2_1', 'b2_1', 'b3_2', 'c3_2', 'd3_2', 'e2_1', 'e3_2', 'f2_1'
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -177,7 +183,12 @@ func _get_valid_moves(coord: String):
 	var piece = _board[coord]
 	var valid_moves: Array[String] = []
 	
-	if 'Rook' in piece:
+	if 'Pawn' in piece:
+		# TODO: En Passant
+		_pawn(coord, valid_moves)
+		_pawn_captures(coord, valid_moves)
+		print('Pawn', coord , 'valid moves:', valid_moves)
+	elif 'Rook' in piece:
 		_rook(coord, valid_moves, NORTH, coord, {})
 		_rook(coord, valid_moves, SOUTH, coord, {})
 		_rook(coord, valid_moves, EAST, coord, {})
@@ -189,7 +200,16 @@ func _get_valid_moves(coord: String):
 		_bishop(coord, valid_moves, SOUTH_WEST, coord, {})
 		_bishop(coord, valid_moves, SOUTH_EAST, coord, {})
 		print('Bishop', coord , 'valid moves:', valid_moves)
-		
+	elif 'Queen' in piece:
+		_rook(coord, valid_moves, NORTH, coord, {})
+		_rook(coord, valid_moves, SOUTH, coord, {})
+		_rook(coord, valid_moves, EAST, coord, {})
+		_rook(coord, valid_moves, WEST, coord, {})
+		_bishop(coord, valid_moves, NORTH_WEST, coord, {})
+		_bishop(coord, valid_moves, NORTH_EAST, coord, {})
+		_bishop(coord, valid_moves, SOUTH_WEST, coord, {})
+		_bishop(coord, valid_moves, SOUTH_EAST, coord, {})
+		print('Queen', coord , 'valid moves:', valid_moves)
 	else:
 		print(piece, "is not a recognized piece.")
 	
@@ -284,18 +304,100 @@ func _get_square_type(_coordinate: String):
 
 func _is_valid_square(coord: String) -> bool:
 	
-	print(coord)
-	
 	if not _board.has(coord):
 		# non-existent square
 		return false
-		
+	
 	#if _board[coord] != null and _curr_player in _board[coord]:
-		### Can't capture own pieces
+		## Can't capture own pieces
 		#return false
 	
 	return true
 
+
+func _is_valid_pawn_capture(coord: String) -> bool:
+	
+	if not _board.has(coord):
+		# non-existent square
+		return false
+	
+	if _board[coord] != null and _curr_player in _board[coord]:
+		# Can't capture own pieces
+		return false
+	
+	if _board[coord] == null:
+		# Pawns can only capture diagonally
+		return false
+	
+	return true
+
+
+func _pawn_captures(coord: String, valid_moves: Array[String]):
+	if _curr_player == LIGHT:
+		var new_coord = _move(coord, 1, -1, 0)
+		if _is_valid_pawn_capture(new_coord):
+			valid_moves.append(new_coord)
+		new_coord = _move(coord, -1, -1, 0)
+		if _is_valid_pawn_capture(new_coord):
+			valid_moves.append(new_coord)
+	else:
+		var new_coord = _move(coord, 1, 1, 0)
+		if _is_valid_pawn_capture(new_coord):
+			valid_moves.append(new_coord)
+		new_coord = _move(coord, -1, 1, 0)
+		if _is_valid_pawn_capture(new_coord):
+			valid_moves.append(new_coord)
+
+
+func _pawn(coord: String, valid_moves: Array[String]):
+	
+	var distance = 1
+	
+	if coord in PAWN_HOME_ROW:
+		distance = 2
+	
+	if _curr_player == LIGHT:
+		_pawn_helper(coord, valid_moves, NORTH, coord, {}, distance)
+	else:
+		_pawn_helper(coord, valid_moves, SOUTH, coord, {}, distance)
+
+
+func _pawn_helper(
+	coord: String, 
+	moves: Array, 
+	d: String, 
+	skip: String, 
+	seen: Dictionary,
+	count: int
+) -> Array:
+	
+	if seen.has(coord):
+		return moves
+	
+	seen[coord] = true
+		
+	if coord != skip and not _is_valid_square(coord):
+		return moves
+	
+	if coord != skip:
+		moves.append(coord)
+	
+	if count <= 0:
+		return moves
+	
+	var f = _get_file(coord)
+	var r = _get_rank(coord)
+	var z = _get_z(coord)
+	
+	if d == NORTH:
+		_pawn_helper(f + str(r - 1) + "_" + str(z), moves, d, skip, seen, count - 1)
+	elif d == SOUTH:
+		_pawn_helper(f + str(r + 1) + "_" + str(z), moves, d, skip, seen, count - 1)
+	
+	_pawn_helper(f + str(r) + "_" + str(z + 1), moves, d, skip, seen, count)
+	_pawn_helper(f + str(r) + "_" + str(z - 1), moves, d, skip, seen, count)
+	
+	return moves
 
 func _rook(
 	coord: String, moves: Array, d: String, skip: String, seen: Dictionary
@@ -303,6 +405,8 @@ func _rook(
 	
 	if seen.has(coord):
 		return moves
+	
+	seen[coord] = true
 		
 	if coord != skip and not _is_valid_square(coord):
 		return moves
