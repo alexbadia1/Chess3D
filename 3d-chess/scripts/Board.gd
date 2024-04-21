@@ -213,7 +213,7 @@ func _get_valid_moves(coord: String):
 	else:
 		print(piece, "is not a recognized piece.")
 	
-	return []
+	return valid_moves
 
 
 func _on_square_hover(_new_active_coordinate: String):
@@ -223,13 +223,21 @@ func _on_square_hover(_new_active_coordinate: String):
 		if _board[_new_active_coordinate] != null:
 			_highlight(_new_active_coordinate)
 			_curr_move_src = _new_active_coordinate
+			if _curr_valid_moves != null:
+				for cvm in _curr_valid_moves:
+					_unhint(cvm)
 			_curr_valid_moves = _get_valid_moves(_new_active_coordinate)
+			for c in _curr_valid_moves:
+				_hint(c)
 		return
 		
 	# De-select current piece
 	if _curr_move_src == _new_active_coordinate:
 		_unhighlight(_curr_move_src)
 		_curr_move_src = null
+		for cvm in _curr_valid_moves:
+			_unhint(cvm)
+		_curr_valid_moves = []
 		return
 		
 	if _curr_valid_moves.has(_new_active_coordinate):
@@ -247,6 +255,9 @@ func _on_square_hover(_new_active_coordinate: String):
 		_highlight(_prev_move_dst)
 		
 		_curr_move_src = null
+		for cvm in _curr_valid_moves:
+			_unhint(cvm)
+		_curr_valid_moves = []
 		
 		return
 	
@@ -255,12 +266,31 @@ func _on_square_hover(_new_active_coordinate: String):
 		_unhighlight(_curr_move_src)
 		_highlight(_new_active_coordinate)
 		_curr_move_src = _new_active_coordinate
+		if _curr_valid_moves != null:
+			for cvm in _curr_valid_moves:
+				_unhint(cvm)
 		_curr_valid_moves = _get_valid_moves(_new_active_coordinate)
+		for c in _curr_valid_moves:
+			_hint(c)
 		return
 	
 	_unhighlight(_curr_move_src)
 	_curr_move_src = null
 
+
+func _hint(_coordinate: String):
+	var unhinted_area: Area3D = get_node(_coordinate)
+	var unhinted_box: CSGCylinder3D = unhinted_area.get_node("HintSquare")
+	unhinted_box.visible = true
+	unhinted_box.material.emission_enabled = true
+
+
+func _unhint(_coordinate: String):
+	var unhinted_area: Area3D = get_node(_coordinate)
+	var unhinted_box: CSGCylinder3D = unhinted_area.get_node("HintSquare")
+	unhinted_box.visible = false
+	unhinted_box.material.emission_enabled = false
+	
 
 func _highlight(_coordinate: String):
 	
@@ -308,9 +338,9 @@ func _is_valid_square(coord: String) -> bool:
 		# non-existent square
 		return false
 	
-	#if _board[coord] != null and _curr_player in _board[coord]:
-		## Can't capture own pieces
-		#return false
+	if _board[coord] != null and _curr_player in _board[coord]:
+		# Can't capture own pieces
+		return false
 	
 	return true
 

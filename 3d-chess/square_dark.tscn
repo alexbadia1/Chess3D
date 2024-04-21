@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjgo3cjy6lwsc"]
+[gd_scene load_steps=5 format=3 uid="uid://bjgo3cjy6lwsc"]
 
 [ext_resource type="Script" path="res://scripts/SquareLight.gd" id="1_r6esq"]
 
@@ -8,6 +8,12 @@
 transparency = 1
 albedo_color = Color(0.45098, 0.584314, 0.321569, 1)
 emission = Color(1, 1, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d14bb"]
+albedo_color = Color(0.188235, 0.180392, 0.168627, 1)
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
 
 [node name="SquareDark" type="Area3D"]
 script = ExtResource("1_r6esq")
@@ -21,5 +27,11 @@ unique_name_in_owner = true
 cast_shadow = 0
 size = Vector3(1, 0.25, 1)
 material = SubResource("StandardMaterial3D_m568p")
+
+[node name="HintSquare" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.05, 0, 0, 0, 0.5, 0, 0.0763203, 0)
+visible = false
+sides = 64
+material = SubResource("StandardMaterial3D_d14bb")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
