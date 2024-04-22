@@ -5,7 +5,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_33yil"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vnhn"]
-albedo_color = Color(0.921569, 0.92549, 0.815686, 1)
+transparency = 1
+albedo_color = Color(0.921569, 0.92549, 0.815686, 0.662745)
 emission = Color(1, 1, 0.2, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvaky"]
@@ -20,10 +21,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 script = ExtResource("1_ycuyi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.035, 0, 0, 0, 1, 0, 0.145, 0)
+transform = Transform3D(0.9, 0, 0, 0, 0.035, 0, 0, 0, 0.9, 0, 0.145, 0)
 shape = SubResource("BoxShape3D_33yil")
 
 [node name="ColorSquare" type="CSGBox3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 1, 0, 0, 0, 0.9, 0, 0, 0)
 cast_shadow = 0
 size = Vector3(1, 0.25, 1)
 material = SubResource("StandardMaterial3D_5vnhn")

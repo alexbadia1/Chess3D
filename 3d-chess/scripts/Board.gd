@@ -368,7 +368,7 @@ func _highlight(_coordinate: String):
 	
 	var unhighlighted_area: Area3D = get_node(_coordinate)
 	var unhighlighted_box: CSGBox3D = unhighlighted_area.get_node("ColorSquare")
-	unhighlighted_box.material.albedo_color = Color("#FFFF33")
+	unhighlighted_box.material.albedo_color = Color("#FFFF33", .66)
 
 
 func _unhighlight(_coordinate: String):
@@ -377,9 +377,9 @@ func _unhighlight(_coordinate: String):
 	var highlighted_box: CSGBox3D = highlighted_area.get_node("ColorSquare")
 	
 	if _get_square_type(_coordinate) == 'light':
-		highlighted_box.material.albedo_color = Color('#EBECD0')
+		highlighted_box.material.albedo_color = Color('#EBECD0', .66)
 	else:
-		highlighted_box.material.albedo_color = Color('#739552')
+		highlighted_box.material.albedo_color = Color('#739552', .66)
 
 
 func _get_square_type(_coordinate: String):
