@@ -26,7 +26,6 @@ ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource("16_18po5")
 
 [node name="Board" type="Node3D" parent="."]
 script = ExtResource("1_d0exn")
@@ -429,6 +428,7 @@ stream = ExtResource("15_c6etk")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.695913, 0.596054, -0.400531, 0, 0.557745, 0.830012, 0.718126, 0.577616, -0.388142, -6.745, 9.17, -3.515)
 fov = 87.0
+script = ExtResource("16_18po5")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hv4sp")
