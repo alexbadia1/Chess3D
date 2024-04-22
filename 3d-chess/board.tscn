@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtabiobeqbddk"]
+[gd_scene load_steps=13 format=3 uid="uid://dtabiobeqbddk"]
 
 [ext_resource type="PackedScene" uid="uid://bdbdfcvyf422a" path="res://pieces/pawn.glb" id="1_4hmpi"]
 [ext_resource type="Script" path="res://scripts/Board.gd" id="1_d0exn"]
 [ext_resource type="PackedScene" uid="uid://dkgdqm4y8atg5" path="res://square_light.tscn" id="2_sqmvr"]
 [ext_resource type="PackedScene" uid="uid://bjgo3cjy6lwsc" path="res://square_dark.tscn" id="3_4qoum"]
 [ext_resource type="PackedScene" uid="uid://chyif04smvu4h" path="res://pieces/rook.glb" id="3_40c17"]
+[ext_resource type="Script" path="res://scripts/themedark.gd" id="3_dn4ux"]
 [ext_resource type="PackedScene" uid="uid://c1ydfd33vpxwm" path="res://pieces/king.glb" id="4_jl28i"]
 [ext_resource type="PackedScene" uid="uid://bfac7begn26b1" path="res://pieces/queen.glb" id="5_l8f4g"]
 [ext_resource type="PackedScene" uid="uid://d1nx3ar866rgg" path="res://pieces/knight.glb" id="6_noc6v"]
 [ext_resource type="PackedScene" uid="uid://dvr85xveaf5t8" path="res://pieces/bishop.glb" id="7_25h0j"]
+[ext_resource type="Script" path="res://scripts/themelight.gd" id="11_oeb15"]
 
 [sub_resource type="Environment" id="Environment_5ipgd"]
 background_mode = 1
@@ -20,53 +22,69 @@ sdfgi_enabled = true
 [node name="Board" type="Node3D" parent="."]
 script = ExtResource("1_d0exn")
 
-[node name="RookBlackA_1" parent="Board" instance=ExtResource("3_40c17")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.10873, 3)
+[node name="RookDarkA_1" parent="Board" instance=ExtResource("3_40c17")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.12, 3)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackA_1" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkA_1" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 4.48778, 3)
+script = ExtResource("3_dn4ux")
 
-[node name="QueenBlack" parent="Board" instance=ExtResource("5_l8f4g")]
+[node name="QueenDark" parent="Board" instance=ExtResource("5_l8f4g")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.17, 2)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackB_1" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkB_1" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 4.48778, 2)
+script = ExtResource("3_dn4ux")
 
-[node name="KnightBlackB_2" parent="Board" instance=ExtResource("6_noc6v")]
+[node name="KnightDarkB_2" parent="Board" instance=ExtResource("6_noc6v")]
 transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 3, 2.15, 2)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackB_2" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkB_2" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.48778, 2)
+script = ExtResource("3_dn4ux")
 
-[node name="BishopBlackC_2" parent="Board" instance=ExtResource("7_25h0j")]
+[node name="BishopDarkC_2" parent="Board" instance=ExtResource("7_25h0j")]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 3, 2.15, 1)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackC_2" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkC_2" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.48778, 1)
+script = ExtResource("3_dn4ux")
 
-[node name="BishopBlackD_2" parent="Board" instance=ExtResource("7_25h0j")]
+[node name="BishopDarkD_2" parent="Board" instance=ExtResource("7_25h0j")]
 transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 3, 2.15, 0)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackD_2" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkD_2" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.48778, 0)
+script = ExtResource("3_dn4ux")
 
-[node name="KingBlack" parent="Board" instance=ExtResource("4_jl28i")]
+[node name="KingDark" parent="Board" instance=ExtResource("4_jl28i")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.15, -1)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackE_1" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkE_1" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 4.48778, -1)
+script = ExtResource("3_dn4ux")
 
-[node name="KnightBlackE_2" parent="Board" instance=ExtResource("6_noc6v")]
+[node name="KnightDarkE_2" parent="Board" instance=ExtResource("6_noc6v")]
 transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.74228e-08, 1, 4.37114e-08, 3, 2.15, -1)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackE_2" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkE_2" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.48778, -1)
+script = ExtResource("3_dn4ux")
 
-[node name="PawnBlackF_1" parent="Board" instance=ExtResource("1_4hmpi")]
+[node name="PawnDarkF_1" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 4.48778, -2)
+script = ExtResource("3_dn4ux")
 
-[node name="RookBlackF_2" parent="Board" instance=ExtResource("3_40c17")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.10873, -2)
+[node name="RookDarkF_2" parent="Board" instance=ExtResource("3_40c17")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4.12, -2)
+script = ExtResource("3_dn4ux")
 
 [node name="a1_1" parent="Board" instance=ExtResource("3_4qoum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 3)
@@ -76,13 +94,13 @@ _board_position = "a1_1"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, 3)
 _board_position = "a2_1"
 
-[node name="a3_3" parent="Board" instance=ExtResource("3_4qoum")]
+[node name="a9_3" parent="Board" instance=ExtResource("3_4qoum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 3)
-_board_position = "a3_3"
+_board_position = "a9_3"
 
-[node name="a4_3" parent="Board" instance=ExtResource("2_sqmvr")]
+[node name="a10_3" parent="Board" instance=ExtResource("2_sqmvr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 3)
-_board_position = "a4_3"
+_board_position = "a10_3"
 
 [node name="b1_1" parent="Board" instance=ExtResource("2_sqmvr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 2)
@@ -314,13 +332,77 @@ _board_position = "f1_1"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4, -2)
 _board_position = "f2_1"
 
-[node name="f3_3" parent="Board" instance=ExtResource("2_sqmvr")]
+[node name="f9_3" parent="Board" instance=ExtResource("2_sqmvr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
-_board_position = "f3_3"
+_board_position = "f9_3"
 
-[node name="f4_3" parent="Board" instance=ExtResource("3_4qoum")]
+[node name="f10_3" parent="Board" instance=ExtResource("3_4qoum")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -2)
-_board_position = "f4_3"
+_board_position = "f10_3"
+
+[node name="RookLightA_3" parent="Board" instance=ExtResource("3_40c17")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9, 0.12, 3)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightA_3" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 0.48778, 3)
+script = ExtResource("11_oeb15")
+
+[node name="QueenLight" parent="Board" instance=ExtResource("5_l8f4g")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9, 0.17, 2)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightB_3" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 0.48778, 2)
+script = ExtResource("11_oeb15")
+
+[node name="KnightLightB_4" parent="Board" instance=ExtResource("6_noc6v")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -7, -1.85, 2)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightB_4" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6, -1.51222, 2)
+script = ExtResource("11_oeb15")
+
+[node name="BishopLightC_4" parent="Board" instance=ExtResource("7_25h0j")]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -7, -1.85, 1)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightC_4" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6, -1.51222, 1)
+script = ExtResource("11_oeb15")
+
+[node name="BishopLightD_4" parent="Board" instance=ExtResource("7_25h0j")]
+transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -7, -1.85, 0)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightD_4" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6, -1.51222, 0)
+script = ExtResource("11_oeb15")
+
+[node name="KingLight" parent="Board" instance=ExtResource("4_jl28i")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9, 0.15, -1)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightE_4" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 0.48778, -1)
+script = ExtResource("11_oeb15")
+
+[node name="KnightLightE_3" parent="Board" instance=ExtResource("6_noc6v")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -7, -1.85, -1)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightE_3" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6, -1.51222, -1)
+script = ExtResource("11_oeb15")
+
+[node name="RookLightF_3" parent="Board" instance=ExtResource("3_40c17")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -9, 0.12, -2)
+script = ExtResource("11_oeb15")
+
+[node name="PawnLightF_3" parent="Board" instance=ExtResource("1_4hmpi")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 0.48778, -2)
+script = ExtResource("11_oeb15")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.695913, 0.596054, -0.400531, 0, 0.557745, 0.830012, 0.718126, 0.577616, -0.388142, -6.745, 9.17, -3.515)

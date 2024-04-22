@@ -1,9 +1,9 @@
 extends Node3D
 
-var LIGHT = 'LIGHT'
-var DARK = 'DARK'
+var LIGHT = 'Light'
+var DARK = 'Dark'
 
-@export var _curr_player = 'Black'
+@export var _curr_player = 'Dark'
 
 var Z = 'z'
 var OPTIONS = [-1, 0, 1]
@@ -19,6 +19,13 @@ var NORTH_WEST = 'NW'
 var NORTH_EAST = 'NE'
 var SOUTH_WEST = 'SW'
 var SOUTH_EAST = 'SE'
+
+var PAWN = 'Pawn'
+var KNIGHT = 'Knight'
+var ROOK = 'Rook'
+var BISHOP = 'Bishop'
+var QUEEN = 'Queen'
+var KING = 'King'
 
 var _curr_move_src = null
 var _curr_valid_moves = []
@@ -104,31 +111,50 @@ var _board = {
 }
 
 var PAWN_HOME_ROW = [
-	# White Pawns
-	'a2_1', 'b2_1', 'b3_2', 'c3_2', 'd3_2', 'e2_1', 'e3_2', 'f2_1'
+	# Dark Pawns
+	'a2_1', 'b2_1', 'b3_2', 'c3_2', 'd3_2', 'e3_2', 'e2_1', 'f2_1',
+	
+	# Light Pawns
+	'a9_3', 'b9_3', 'b8_4', 'c8_4', 'd8_4', 'e8_4', 'e9_3', 'f9_3'
 ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Black Pieces
-	_board['a1_1'] = 'RookBlackA_1'
-	_board['a2_1'] = 'PawnBlackA_1'
-	_board['b1_1'] = 'QueenBlack'
-	_board['b2_1'] = 'PawnBlackB_1'
-	_board['b2_2'] = 'KnightBlackB_2'
-	_board['b3_2'] = 'PawnBlackB_2'
-	_board['c2_2'] = 'BishopBlackC_2'
-	_board['c3_2'] = 'PawnBlackC_2'
-	_board['d2_2'] = 'BishopBlackD_2'
-	_board['d3_2'] = 'PawnBlackD_2'
-	_board['e1_1'] = 'KingBlack'
-	_board['e2_1'] = 'PawnBlackE_1'
-	_board['e2_2'] = 'KnightBlackE_2'
-	_board['e3_2'] = 'PawnBlackE_2'
-	_board['f1_1'] = 'RookBlackF_1'
-	_board['f2_1'] = 'PawnBlackF_1'
+	_board['a1_1'] = 'RookDarkA_1'
+	_board['a2_1'] = 'PawnDarkA_1'
+	_board['b1_1'] = 'QueenDark'
+	_board['b2_1'] = 'PawnDarkB_1'
+	_board['b2_2'] = 'KnightDarkB_2'
+	_board['b3_2'] = 'PawnDarkB_2'
+	_board['c2_2'] = 'BishopDarkC_2'
+	_board['c3_2'] = 'PawnDarkC_2'
+	_board['d2_2'] = 'BishopDarkD_2'
+	_board['d3_2'] = 'PawnDarkD_2'
+	_board['e2_2'] = 'KnightDarkE_2'
+	_board['e3_2'] = 'PawnDarkE_2'
+	_board['e1_1'] = 'KingDark'
+	_board['e2_1'] = 'PawnDarkE_1'
+	_board['f1_1'] = 'RookDarkF_1'
+	_board['f2_1'] = 'PawnDarkF_1'
 	
 	# White Pieces
+	_board['a10_3'] = 'RookLightA_3'
+	_board['a9_3'] = 'PawnLightA_3'
+	_board['b10_3'] = 'QueenLight'
+	_board['b9_3'] = 'PawnLightB_3'
+	_board['b9_4'] = 'KnightLightB_4'
+	_board['b8_4'] = 'PawnLightB_4'
+	_board['c9_4'] = 'BishopLightC_4'
+	_board['c8_4'] = 'PawnLightC_4'
+	_board['d9_4'] = 'BishopLightD_4'
+	_board['d8_4'] = 'PawnLightD_4'
+	_board['e9_4'] = 'KnightLightE_4'
+	_board['e8_4'] = 'PawnLightE_4'
+	_board['e10_3'] = 'KingLight'
+	_board['e9_3'] = 'PawnLightE_4'
+	_board['f10_3'] = 'RookLightF_4'
+	_board['f9_3'] = 'PawnLightF_4'
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -183,24 +209,26 @@ func _get_valid_moves(coord: String):
 	var piece = _board[coord]
 	var valid_moves: Array[String] = []
 	
-	if 'Pawn' in piece:
+	if PAWN in piece:
 		# TODO: En Passant
 		_pawn(coord, valid_moves)
-		_pawn_captures(coord, valid_moves)
-		print('Pawn', coord , 'valid moves:', valid_moves)
-	elif 'Rook' in piece:
+		print('Pawn [', coord , '] valid moves:', valid_moves)
+	elif KNIGHT in piece:
+		_knight(coord, valid_moves)
+		print('Knight [', coord , '] valid moves: ', valid_moves)
+	elif ROOK in piece:
 		_rook(coord, valid_moves, NORTH, coord, {})
 		_rook(coord, valid_moves, SOUTH, coord, {})
 		_rook(coord, valid_moves, EAST, coord, {})
 		_rook(coord, valid_moves, WEST, coord, {})
-		print('Rook', coord , 'valid moves:', valid_moves)
-	elif 'Bishop' in piece:
+		print('Rook [', coord , '] valid moves:', valid_moves)
+	elif BISHOP in piece:
 		_bishop(coord, valid_moves, NORTH_WEST, coord, {})
 		_bishop(coord, valid_moves, NORTH_EAST, coord, {})
 		_bishop(coord, valid_moves, SOUTH_WEST, coord, {})
 		_bishop(coord, valid_moves, SOUTH_EAST, coord, {})
-		print('Bishop', coord , 'valid moves:', valid_moves)
-	elif 'Queen' in piece:
+		print('Bishop [', coord , '] valid moves:', valid_moves)
+	elif QUEEN in piece:
 		_rook(coord, valid_moves, NORTH, coord, {})
 		_rook(coord, valid_moves, SOUTH, coord, {})
 		_rook(coord, valid_moves, EAST, coord, {})
@@ -209,7 +237,10 @@ func _get_valid_moves(coord: String):
 		_bishop(coord, valid_moves, NORTH_EAST, coord, {})
 		_bishop(coord, valid_moves, SOUTH_WEST, coord, {})
 		_bishop(coord, valid_moves, SOUTH_EAST, coord, {})
-		print('Queen', coord , 'valid moves:', valid_moves)
+		print('Queen [', coord , '] valid moves:', valid_moves)
+	elif KING in piece:
+		_king(coord, valid_moves)
+		print('King [', coord , '] valid moves:', valid_moves)
 	else:
 		print(piece, "is not a recognized piece.")
 	
@@ -217,6 +248,9 @@ func _get_valid_moves(coord: String):
 
 
 func _on_square_hover(_new_active_coordinate: String):
+	
+	if _board[_new_active_coordinate] != null and _curr_player not in _board[_new_active_coordinate]:
+		return
 	
 	# New piece selection
 	if _curr_move_src == null:
@@ -252,10 +286,7 @@ func _on_square_hover(_new_active_coordinate: String):
 		_prev_move_src = _curr_move_src
 		_prev_move_dst = _new_active_coordinate
 		
-		var chess_piece: Node3D = get_node(_board[_prev_move_src])
-		var tile: CSGBox3D = get_node(_prev_move_dst).get_node('ColorSquare')
-		var tile_pos = tile.global_transform.origin
-		chess_piece.global_transform.origin = tile_pos + Vector3(0, .48, 0)
+		_move_piece()
 		
 		_board[_prev_move_dst] = _board[_prev_move_src]
 		_board[_prev_move_src] = null
@@ -285,8 +316,28 @@ func _on_square_hover(_new_active_coordinate: String):
 	
 	_unhighlight(_curr_move_src)
 	_curr_move_src = null
+	if _curr_valid_moves != null:
+		for cvm in _curr_valid_moves:
+			_unhint(cvm)
+	_curr_valid_moves = []
 
 
+func _move_piece():
+	var chess_piece: Node3D = get_node(_board[_prev_move_src])
+	var tile: CSGBox3D = get_node(_prev_move_dst).get_node('ColorSquare')
+	var tile_pos = tile.global_transform.origin
+	
+	var offset = .15
+	
+	if PAWN in _board[_prev_move_src]:
+		offset = .48
+	elif ROOK in _board[_prev_move_src]:
+		offset = .11
+	elif QUEEN in _board[_prev_move_src]:
+		offset = .17
+	
+	chess_piece.global_transform.origin = tile_pos + Vector3(0, offset, 0)
+	
 func _hint(_coordinate: String):
 	var unhinted_area: Area3D = get_node(_coordinate)
 	var unhinted_box: CSGCylinder3D = unhinted_area.get_node("HintSquare")
@@ -371,72 +422,70 @@ func _is_valid_pawn_capture(coord: String) -> bool:
 	return true
 
 
-func _pawn_captures(coord: String, valid_moves: Array[String]):
-	if _curr_player == LIGHT:
-		var new_coord = _move(coord, 1, -1, 0)
-		if _is_valid_pawn_capture(new_coord):
-			valid_moves.append(new_coord)
-		new_coord = _move(coord, -1, -1, 0)
-		if _is_valid_pawn_capture(new_coord):
-			valid_moves.append(new_coord)
-	else:
-		var new_coord = _move(coord, 1, 1, 0)
-		if _is_valid_pawn_capture(new_coord):
-			valid_moves.append(new_coord)
-		new_coord = _move(coord, -1, 1, 0)
-		if _is_valid_pawn_capture(new_coord):
-			valid_moves.append(new_coord)
-
-
-func _pawn(coord: String, valid_moves: Array[String]):
+func _pawn(coord: String, moves: Array[String]):
 	
-	var distance = 1
-	
-	if coord in PAWN_HOME_ROW:
-		distance = 2
+	var options = []
 	
 	if _curr_player == LIGHT:
-		_pawn_helper(coord, valid_moves, NORTH, coord, {}, distance)
+		options.append(_move(coord, 0, -1, 0))
+		options.append(_move(coord, 0, -1, 1))
+		if coord in PAWN_HOME_ROW:
+			options.append(_move(coord, 0, -2, 0))
+			options.append(_move(coord, 0, -2, 1))
 	else:
-		_pawn_helper(coord, valid_moves, SOUTH, coord, {}, distance)
+		options.append(_move(coord, 0, 1, 0))
+		options.append(_move(coord, 0, 1, 1))
+		if coord in PAWN_HOME_ROW:
+			options.append(_move(coord, 0, 2, 0))
+			options.append(_move(coord, 0, 2, 1))
+	
+	for option in options:
+		if _is_valid_square(option):
+			moves.append(option)
+	
+	var captures = []
+	
+	if _curr_player == LIGHT:
+		captures.append(_move(coord, 1, -1, 0))
+		captures.append(_move(coord, -1, -1, 0))
+	else:
+		captures.append(_move(coord, 1, 1, 0))
+		captures.append(_move(coord, -1, 1, 0))
+	
+	for capture in captures:
+		if _is_valid_pawn_capture(capture):
+			moves.append(capture)
 
 
-func _pawn_helper(
-	coord: String, 
-	moves: Array, 
-	d: String, 
-	skip: String, 
-	seen: Dictionary,
-	count: int
-) -> Array:
-	
-	if seen.has(coord):
-		return moves
-	
-	seen[coord] = true
+func _knight(coord: String, moves: Array[String]):
+	var options = [ 
+		# Lateral (XY)
+		_move(coord, 1, -2, 0),
+		_move(coord, -1, -2, 0),
+		_move(coord, 1, 2, 0),
+		_move(coord, -1, 2, 0),
+		_move(coord, 2, 1, 0),
+		_move(coord, 2, -1, 0),
+		_move(coord, -2, 1, 0),
+		_move(coord, -2, -1, 0),
 		
-	if coord != skip and not _is_valid_square(coord):
-		return moves
+		# Orthogonal (-Z)
+		_move(coord, 0, -2, 1),
+		_move(coord, 0, 2, 1),
+		_move(coord, 2, 0, 1),
+		_move(coord, -2, 0, 1),
+		
+		# Orthogonal (+Z)
+		_move(coord, 0, -2, -1),
+		_move(coord, 0, 2, -1),
+		_move(coord, 2, 0, -1),
+		_move(coord, -2, 0, -1)
+	]
 	
-	if coord != skip:
-		moves.append(coord)
-	
-	if count <= 0:
-		return moves
-	
-	var f = _get_file(coord)
-	var r = _get_rank(coord)
-	var z = _get_z(coord)
-	
-	if d == NORTH:
-		_pawn_helper(f + str(r - 1) + "_" + str(z), moves, d, skip, seen, count - 1)
-	elif d == SOUTH:
-		_pawn_helper(f + str(r + 1) + "_" + str(z), moves, d, skip, seen, count - 1)
-	
-	_pawn_helper(f + str(r) + "_" + str(z + 1), moves, d, skip, seen, count)
-	_pawn_helper(f + str(r) + "_" + str(z - 1), moves, d, skip, seen, count)
-	
-	return moves
+	for option in options:
+		if _is_valid_square(option):
+			moves.append(option)
+
 
 func _rook(
 	coord: String, moves: Array, d: String, skip: String, seen: Dictionary
@@ -524,4 +573,44 @@ func _bishop(
 	)
 
 	return moves
+
+
+func _king(coord: String, moves: Array[String]):
+	var options = [ 
+		# Lateral (XY)
+		_move(coord, 0, -1, 0),   # Up
+		_move(coord, 0, 1, 0),    # Down
+		_move(coord, 1, 0, 0),    # Left
+		_move(coord, -1, 0, 0),   # Right
+		_move(coord, 1, -1, 0),   # Up-Left
+		_move(coord, -1, -1, 0),  # Up Right
+		_move(coord, 1, 1, 0),    # Down-Left
+		_move(coord, -1, 1, 0),   # Down-Right
+		
+		# Orthogonal (+Z) and Lateral 
+		_move(coord, 0, 0, 1),
+		_move(coord, 0, -1, 1),   # Up
+		_move(coord, 0, 1, 1),    # Down
+		_move(coord, 1, 0, 1),    # Left
+		_move(coord, -1, 0, 1),   # Right
+		_move(coord, 1, -1, 1),   # Up-Left
+		_move(coord, -1, -1, 1),  # Up Right
+		_move(coord, 1, 1, 1),    # Down-Left
+		_move(coord, -1, 1, 1),   # Down-Right
+		
+		# Orthogonal (-Z) and Lateral 
+		_move(coord, 0, 0, -1),
+		_move(coord, 0, -1, -1),   # Up
+		_move(coord, 0, 1, -1),    # Down
+		_move(coord, 1, 0, -1),    # Left
+		_move(coord, -1, 0, -1),   # Right
+		_move(coord, 1, -1, -1),   # Up-Left
+		_move(coord, -1, -1, -1),  # Up Right
+		_move(coord, 1, 1, -1),    # Down-Left
+		_move(coord, -1, 1, -1),   # Down-Right
+	]
+	
+	for option in options:
+		if _is_valid_square(option):
+			moves.append(option)
 
