@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dtabiobeqbddk"]
+[gd_scene load_steps=18 format=3 uid="uid://dtabiobeqbddk"]
 
 [ext_resource type="PackedScene" uid="uid://bdbdfcvyf422a" path="res://pieces/pawn.glb" id="1_4hmpi"]
 [ext_resource type="Script" path="res://scripts/Board.gd" id="1_d0exn"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://d1nx3ar866rgg" path="res://pieces/knight.glb" id="6_noc6v"]
 [ext_resource type="PackedScene" uid="uid://dvr85xveaf5t8" path="res://pieces/bishop.glb" id="7_25h0j"]
 [ext_resource type="Script" path="res://scripts/themelight.gd" id="11_oeb15"]
+[ext_resource type="AudioStream" uid="uid://d0oi1fre83two" path="res://audio/move.mp3" id="12_wfqnt"]
+[ext_resource type="AudioStream" uid="uid://cwj5omcflqlhr" path="res://audio/capture.mp3" id="13_i3t32"]
+[ext_resource type="AudioStream" uid="uid://ckxkcum2ibw8s" path="res://audio/castle.mp3" id="14_nv6l4"]
+[ext_resource type="AudioStream" uid="uid://ccd7xx3hu6w3" path="res://audio/moveopponent.mp3" id="15_c6etk"]
 
 [sub_resource type="Sky" id="Sky_4n1df"]
 
@@ -406,6 +410,19 @@ script = ExtResource("11_oeb15")
 [node name="PawnLightF_3" parent="Board" instance=ExtResource("1_4hmpi")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -8, 0.48778, -2)
 script = ExtResource("11_oeb15")
+
+[node name="move" type="AudioStreamPlayer" parent="Board"]
+stream = ExtResource("12_wfqnt")
+mix_target = 1
+
+[node name="capture" type="AudioStreamPlayer" parent="Board"]
+stream = ExtResource("13_i3t32")
+
+[node name="castle" type="AudioStreamPlayer" parent="Board"]
+stream = ExtResource("14_nv6l4")
+
+[node name="moveopponent" type="AudioStreamPlayer" parent="Board"]
+stream = ExtResource("15_c6etk")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.695913, 0.596054, -0.400531, 0, 0.557745, 0.830012, 0.718126, 0.577616, -0.388142, -6.745, 9.17, -3.515)

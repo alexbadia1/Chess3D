@@ -3,7 +3,7 @@ extends Node3D
 var LIGHT = 'Light'
 var DARK = 'Dark'
 
-@export var _curr_player = 'Dark'
+@export var _curr_player = LIGHT
 
 var Z = 'z'
 var OPTIONS = [-1, 0, 1]
@@ -249,22 +249,20 @@ func _get_valid_moves(coord: String):
 
 func _on_square_hover(_new_active_coordinate: String):
 	
-	if _board[_new_active_coordinate] != null and _curr_player not in _board[_new_active_coordinate]:
-		return
-	
 	# New piece selection
 	if _curr_move_src == null:
 		if _board[_new_active_coordinate] != null:
-			_highlight(_new_active_coordinate)
-			_curr_move_src = _new_active_coordinate
-			if _curr_valid_moves != null:
-				for cvm in _curr_valid_moves:
-					_unhint(cvm)
-			_curr_valid_moves = _get_valid_moves(_new_active_coordinate)
-			for c in _curr_valid_moves:
-				_hint(c)
+			if _curr_player in _board[_new_active_coordinate]:
+				_highlight(_new_active_coordinate)
+				_curr_move_src = _new_active_coordinate
+				if _curr_valid_moves != null:
+					for cvm in _curr_valid_moves:
+						_unhint(cvm)
+				_curr_valid_moves = _get_valid_moves(_new_active_coordinate)
+				for c in _curr_valid_moves:
+					_hint(c)
 		return
-		
+	
 	# De-select current piece
 	if _curr_move_src == _new_active_coordinate:
 		_unhighlight(_curr_move_src)
@@ -286,6 +284,16 @@ func _on_square_hover(_new_active_coordinate: String):
 		_prev_move_src = _curr_move_src
 		_prev_move_dst = _new_active_coordinate
 		
+		if _board[_prev_move_dst] != null:
+			print(_curr_player, ' captured: ', _board[_prev_move_dst])
+			get_node(_board[_prev_move_dst]).queue_free()
+			get_node('capture').play()
+		else:
+			if _curr_player == LIGHT:
+				get_node('move').play()
+			else:
+				get_node('moveopponent').play()
+		
 		_move_piece()
 		
 		_board[_prev_move_dst] = _board[_prev_move_src]
@@ -303,15 +311,16 @@ func _on_square_hover(_new_active_coordinate: String):
 	
 	# Change piece selection
 	if _board[_new_active_coordinate] != null:
-		_unhighlight(_curr_move_src)
-		_highlight(_new_active_coordinate)
-		_curr_move_src = _new_active_coordinate
-		if _curr_valid_moves != null:
-			for cvm in _curr_valid_moves:
-				_unhint(cvm)
-		_curr_valid_moves = _get_valid_moves(_new_active_coordinate)
-		for c in _curr_valid_moves:
-			_hint(c)
+		if _curr_player in _board[_new_active_coordinate]:
+			_unhighlight(_curr_move_src)
+			_highlight(_new_active_coordinate)
+			_curr_move_src = _new_active_coordinate
+			if _curr_valid_moves != null:
+				for cvm in _curr_valid_moves:
+					_unhint(cvm)
+			_curr_valid_moves = _get_valid_moves(_new_active_coordinate)
+			for c in _curr_valid_moves:
+				_hint(c)
 		return
 	
 	_unhighlight(_curr_move_src)
@@ -338,6 +347,9 @@ func _move_piece():
 	
 	chess_piece.global_transform.origin = tile_pos + Vector3(0, offset, 0)
 	
+	_curr_player = DARK if _curr_player == LIGHT else LIGHT
+
+
 func _hint(_coordinate: String):
 	var unhinted_area: Area3D = get_node(_coordinate)
 	var unhinted_box: CSGCylinder3D = unhinted_area.get_node("HintSquare")
@@ -428,17 +440,17 @@ func _pawn(coord: String, moves: Array[String]):
 	
 	if _curr_player == LIGHT:
 		options.append(_move(coord, 0, -1, 0))
-		options.append(_move(coord, 0, -1, 1))
 		if coord in PAWN_HOME_ROW:
 			options.append(_move(coord, 0, -2, 0))
-			options.append(_move(coord, 0, -2, 1))
 	else:
 		options.append(_move(coord, 0, 1, 0))
-		options.append(_move(coord, 0, 1, 1))
 		if coord in PAWN_HOME_ROW:
 			options.append(_move(coord, 0, 2, 0))
-			options.append(_move(coord, 0, 2, 1))
 	
+	options.append(_move(coord, 0, 0, -1))
+	options.append(_move(coord, 0, 0, 1))
+	
+	print('Pawn Options: ', options)
 	for option in options:
 		if _is_valid_square(option):
 			moves.append(option)
