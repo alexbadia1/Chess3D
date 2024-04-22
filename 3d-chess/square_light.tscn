@@ -4,12 +4,13 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_33yil"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsl6n"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vnhn"]
 albedo_color = Color(0.921569, 0.92549, 0.815686, 1)
 emission = Color(1, 1, 0.2, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvaky"]
-albedo_color = Color(0.188235, 0.180392, 0.168627, 1)
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.392157)
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.1
@@ -25,10 +26,10 @@ shape = SubResource("BoxShape3D_33yil")
 [node name="ColorSquare" type="CSGBox3D" parent="."]
 cast_shadow = 0
 size = Vector3(1, 0.25, 1)
-material = SubResource("StandardMaterial3D_fsl6n")
+material = SubResource("StandardMaterial3D_5vnhn")
 
 [node name="HintSquare" type="CSGCylinder3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.05, 0, 0, 0, 0.5, 0, 0.0766077, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.01, 0, 0, 0, 0.4, 0, 0.135, 0)
 visible = false
 sides = 64
 material = SubResource("StandardMaterial3D_uvaky")

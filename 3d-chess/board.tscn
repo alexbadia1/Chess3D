@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtabiobeqbddk"]
+[gd_scene load_steps=14 format=3 uid="uid://dtabiobeqbddk"]
 
 [ext_resource type="PackedScene" uid="uid://bdbdfcvyf422a" path="res://pieces/pawn.glb" id="1_4hmpi"]
 [ext_resource type="Script" path="res://scripts/Board.gd" id="1_d0exn"]
@@ -12,10 +12,13 @@
 [ext_resource type="PackedScene" uid="uid://dvr85xveaf5t8" path="res://pieces/bishop.glb" id="7_25h0j"]
 [ext_resource type="Script" path="res://scripts/themelight.gd" id="11_oeb15"]
 
-[sub_resource type="Environment" id="Environment_5ipgd"]
-background_mode = 1
-ssil_enabled = true
-sdfgi_enabled = true
+[sub_resource type="Sky" id="Sky_4n1df"]
+
+[sub_resource type="Environment" id="Environment_hv4sp"]
+background_mode = 2
+sky = SubResource("Sky_4n1df")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -408,11 +411,17 @@ script = ExtResource("11_oeb15")
 transform = Transform3D(-0.695913, 0.596054, -0.400531, 0, 0.557745, 0.830012, 0.718126, 0.577616, -0.388142, -6.745, 9.17, -3.515)
 fov = 87.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0104718, 0.999945, 0, -0.999945, -0.0104718, -7.079, 4.28, -0.255)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_5ipgd")
+environment = SubResource("Environment_hv4sp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 13, 0)
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.121869, 0.291849, -0.948669, 0, -0.955793, -0.29404, -0.992546, 0.0358345, -0.116482, -14.079, -0.72, -0.255)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -25, 2, 0)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, -4, -33)
+
+[node name="DirectionalLight3D3" type="DirectionalLight3D" parent="DirectionalLight3D3"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 3, 4, -65)

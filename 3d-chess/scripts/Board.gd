@@ -36,8 +36,8 @@ var _prev_move_dst = null
 var _board = {
 	'a1_1': null, 
 	'a2_1': null, 
-	'a3_3': null,
-	'a4_3': null,
+	'a9_3': null,
+	'a10_3': null,
 	
 	# B Rank
 	'b1_1': null,
@@ -106,8 +106,8 @@ var _board = {
 	# F
 	'f1_1': null, 
 	'f2_1': null, 
-	'f3_3': null,
-	'f4_3': null,
+	'f9_3': null,
+	'f10_3': null,
 }
 
 var PAWN_HOME_ROW = [
