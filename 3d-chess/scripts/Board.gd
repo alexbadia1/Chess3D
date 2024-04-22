@@ -442,10 +442,12 @@ func _pawn(coord: String, moves: Array[String]):
 		options.append(_move(coord, 0, -1, 0))
 		if coord in PAWN_HOME_ROW:
 			options.append(_move(coord, 0, -2, 0))
+			options.append(_move(coord, 0, -1, -1))
 	else:
 		options.append(_move(coord, 0, 1, 0))
 		if coord in PAWN_HOME_ROW:
 			options.append(_move(coord, 0, 2, 0))
+			options.append(_move(coord, 0, 1, 1))
 	
 	options.append(_move(coord, 0, 0, -1))
 	options.append(_move(coord, 0, 0, 1))
