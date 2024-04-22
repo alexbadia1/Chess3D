@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc8v264hdddmw"]
+
+[ext_resource type="Script" path="res://scripts/GameStart.gd" id="1_rcxcu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6nvli"]
+font_size = 64
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "3D CHESS"
+label_settings = SubResource("LabelSettings_6nvli")
+
+[node name="VBoxContainerButtons" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonLocal" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "LOCAL"
+script = ExtResource("1_rcxcu")
+
+[node name="ButtonComputer" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "COMPUTER
+"
+script = ExtResource("1_rcxcu")
+
+[node name="ButtonOnline" type="Button" parent="CenterContainer/VBoxContainer/VBoxContainerButtons"]
+layout_mode = 2
+text = "ONLINE
+"
+script = ExtResource("1_rcxcu")
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainerButtons/ButtonLocal" to="CenterContainer/VBoxContainer/VBoxContainerButtons/ButtonLocal" method="_on_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainerButtons/ButtonComputer" to="CenterContainer/VBoxContainer/VBoxContainerButtons/ButtonComputer" method="_on_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/VBoxContainerButtons/ButtonOnline" to="CenterContainer/VBoxContainer/VBoxContainerButtons/ButtonOnline" method="_on_pressed"]
