@@ -449,8 +449,10 @@ func _pawn(coord: String, moves: Array[String]):
 			options.append(_move(coord, 0, 2, 0))
 			options.append(_move(coord, 0, 1, 1))
 	
-	options.append(_move(coord, 0, 0, -1))
-	options.append(_move(coord, 0, 0, 1))
+	if _curr_player == LIGHT:
+		options.append(_move(coord, 0, 0, -1))
+	else:
+		options.append(_move(coord, 0, 0, 1))
 	
 	print('Pawn Options: ', options)
 	for option in options:
